@@ -1,0 +1,14 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Large Raw Masters (keep your Web PNGs tracked, skip huge raw scans if needed)
+rawMasters/
+rawMasters_Corrected/
+FULL_CATALOG_OCR_MASTER.txt
+ocrTexts/
