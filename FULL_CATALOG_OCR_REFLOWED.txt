@@ -505,7 +505,7 @@ In a similar sense, Orenstein, in his work Fusion, incorporates archeological ma
 =========================================
 
 
-[Gloria Rodriguez | Body and Soul | rawMasters_Corrected/page29master_ART.tif#top]
+[Gloria Rodriguez | Body and Soul | rawMasters_Corrected/page29Master_ART.tif#top]
 
 [Sebastian Spreng | Au Bord de L'eau | rawMasters_Corrected/page29Master_ART.tif#bottom]
 
@@ -631,9 +631,9 @@ Originally from Chile, Raimundo Rubio now lives and works in Washington D.C. He 
 
 [Jorge Pantoja | Ejercicios de Exilos | rawMasters_Corrected/page37Master_ART.tif#top]
 
-[Juan-Si | Tread Mill | rawMasters_Corrected/page37Master_ART.tif#left]
+[Juan-Si | Tread Mill | rawMasters_Corrected/page37Master_ART.tif#right]
 
-[Betina Sor | La Gorda del Changuito | rawMasters_Corrected/page37Master_ART.tif#right]
+[Betina Sor | La Gorda del Changuito | rawMasters_Corrected/page37Master_ART.tif#left]
 
 
 =========================================
