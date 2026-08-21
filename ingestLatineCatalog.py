@@ -4,7 +4,7 @@ import json
 from difflib import SequenceMatcher
 
 inputFile = "FULL_CATALOG_OCR_REFLOWED.txt"
-outputFile = "latinx_catalog_data.json"
+outputFile = "latine_catalog_data.json"
 
 ARTISTS_LIST = [
     "Julio Antonio", "Maria Brito", "Alicia Candiani", "Tony Capellán",
