@@ -9,7 +9,7 @@
             --bg-color: #f8f9fa;
             --text-color: #212529;
             --sidebar-bg: #ffffff;
-            --accent-color: #8b0000;
+            --accent-color: #6d008b;
             --border-color: #e9ecef;
         }
 
@@ -133,33 +133,86 @@
             color: var(--text-color);
         }
 
-        /* Mobile Responsive Overrides */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-                height: auto;
-            }
-
-            #sidebar {
-                width: 100%;
-                max-height: 250px;
-                border-right: none;
-                border-bottom: 2px solid var(--border-color);
-            }
-
-            #artist-list {
-                max-height: 180px;
-                overflow-y: auto;
-            }
-
-            #main-content {
-                padding: 20px;
-            }
-
-            .artwork-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Floating Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* Hidden until scroll threshold reached */
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.2s ease;
         }
+
+        #back-to-top:hover {
+            transform: translateY(-2px);
+            background-color: #600000;
+        }
+
+            /* Mobile Responsive Overrides: Horizontal Artist Carousel */
+    @media (max-width: 768px) {
+        body {
+            flex-direction: column;
+            height: auto;
+        }
+
+        #sidebar {
+            width: 100%;
+            max-height: none;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            background: var(--sidebar-bg);
+        }
+
+        #search-box {
+            padding: 10px 15px;
+        }
+
+        #artist-list {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 10px 15px;
+            gap: 8px;
+            -webkit-overflow-scrolling: touch; /* Smooth iOS momentum scrolling */
+        }
+
+        #artist-list li {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--bg-color);
+            font-size: 0.9em;
+        }
+
+        #artist-list li.active {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        #main-content {
+            padding: 20px 15px;
+        }
+
+        .artwork-grid {
+            grid-template-columns: 1fr;
+        }
+    }
     </style>
 </head>
 <body>
@@ -178,6 +231,9 @@
         <div id="artwork-gallery" class="artwork-grid"></div>
         <small>© All Rights Reserved. The artwork images, plates, and artist materials reproduced in this repository are derived from catalog print scans, adjusted for web display, and provided strictly for educational and research purposes.</small>
     </div>
+
+    <!-- Floating Back to Top Button placed before scripts -->
+    <button id="back-to-top" title="Back to top">&uarr; Top</button>
 
     <script>
         let catalogData = [];
@@ -225,15 +281,12 @@
             }
 
             artist.artworks.forEach(plate => {
-                // 1. Separate path from positional anchor (#top, #bottom, #left, etc.)
                 const parts = plate.imagePath.split('#');
                 const rawPath = parts[0].trim();
                 const anchor = parts[1] ? parts[1].trim() : 'full';
 
-                // 2. Extract base filename (e.g., "page13Master_ART")
                 const baseName = rawPath.split('/').pop().replace(/\.(tiff?|png)$/i, '');
 
-                // 3. Match 1-to-1 PNG generated in rawMasters_Web
                 const pngName = anchor !== 'full' ? `${baseName}_${anchor}.png` : `${baseName}.png`;
                 const pngPath = `rawMasters_Web/${pngName}`;
 
@@ -247,7 +300,6 @@
                 img.src = pngPath;
                 img.alt = plate.title;
 
-                // Handle missing files cleanly
                 img.onerror = function() {
                     this.onerror = null;
                     this.style.display = 'none';
@@ -275,6 +327,26 @@
             );
             renderArtistList(filtered);
         });
+
+        // Back to Top Scroll Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        const handleScroll = (e) => {
+            const scrollTop = e.target.scrollTop || window.scrollY;
+            if (scrollTop > 200) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        };
+
+        document.getElementById('main-content').addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll);
+
+        backToTopBtn.onclick = () => {
+            document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
     </script>
 </body>
 </html>
