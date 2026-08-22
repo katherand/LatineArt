@@ -95,17 +95,19 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
+            width: 100%;
+            max-width: 720px; /* Gives each piece a generous, prominent stage */
         }
 
         .artwork-frame {
             width: 100%;
-            min-height: 280px;
-            max-height: 460px;
+            min-height: 320px;
+            max-height: 520px;
             background: #f8f9fa;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 16px;
+            justify-content: center; /* Centers image horizontally inside frame */
+            padding: 20px;
             box-sizing: border-box;
             border-bottom: 1px solid var(--border-color);
         }
@@ -209,8 +211,14 @@
             padding: 20px 15px;
         }
 
+    /* Single-Focus Gallery Layout */
         .artwork-grid {
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers artwork cards horizontally */
+            gap: 35px;
+            margin-top: 25px;
+            margin-bottom: 30px;
         }
     }
     </style>
